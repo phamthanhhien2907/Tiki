@@ -1,0 +1,25 @@
+
+version: "3"
+services:
+  tiki-client:
+    image: tiki-client
+    stdin_open: true
+    ports: 
+      - "3000:3000"
+    networks:
+      - mern-app
+
+  tiki-server:
+    image: tiki-server
+    ports:
+      - "5000:5000"
+    networks:
+      - mern-app
+    environment:
+      - MONGODB_URL=mongodb+srv://tanquanga6k10:CpdAVLjkbtX5chAq@shopdientu.l5fgtvm.mongodb.net/tiki?retryWrites=true&w=majority
+    depends_on:
+      - tiki-client
+
+networks:
+  mern-app:
+    driver: bridge
